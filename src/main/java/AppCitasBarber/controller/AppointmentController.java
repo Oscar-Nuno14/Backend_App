@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/appointments")
@@ -26,5 +27,29 @@ public class AppointmentController {
     @GetMapping
     public List<Appointment> getAll() {
         return service.getAll();
+    }
+
+    // Obtener cita por ID
+    @GetMapping("/{id}")
+    public Optional<Appointment> getById(@PathVariable String id) {
+        return service.getById(id);
+    }
+
+    // Actualizar cita
+    @PutMapping("/{id}")
+    public Appointment update(
+            @PathVariable String id,
+            @RequestBody Appointment appointment
+    ) {
+        return service.update(id, appointment);
+    }
+
+    // Eliminar cita
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable String id) {
+
+        service.delete(id);
+
+        return "Cita eliminada correctamente";
     }
 }
