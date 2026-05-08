@@ -52,4 +52,14 @@ public class AppointmentController {
 
         return "Cita eliminada correctamente";
     }
+
+    // Buscar citas por fecha y barbero
+    @GetMapping("/search")
+    public List<Appointment> searchByDateAndBarber(
+            @RequestParam String date,
+            @RequestParam String barber
+    ) {
+
+        return service.getByDateAndBarber(date, barber);
+    }
 }
